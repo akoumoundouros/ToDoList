@@ -14,19 +14,6 @@ namespace ToDoApp.Server.Controllers
         private readonly IToDoListRepository _toDoListRepo = toDoListRepo;
         private readonly IToDoListItemRepository _toDoItemRepo = toDoItemRepo;
 
-        [HttpGet]
-        public async Task<ApiResponse<ToDoListItemDto>> Get(Guid listId)
-        {
-            var query = await _toDoItemRepo.All(listId);
-            var data = query.Select(s => new ToDoListItemDto()
-            {
-                Id = s.Id.ToString(),
-                ListId = s.ToDoListId.ToString(),
-                Title = s.Title,
-                Position = s.Position,
-            }).ToList();
-            return new ApiResponse<ToDoListItemDto>() { Data = data };
-        }
 
         [HttpDelete]
         [Route("{id}")]

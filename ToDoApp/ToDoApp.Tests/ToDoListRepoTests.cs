@@ -8,8 +8,14 @@ namespace ToDoApp.Tests
     public class ToDoListRepoTests
     {
         private IToDoListRepository _listRepo;
+        private ToDoEntities _db;
         
         public ToDoListRepoTests()
+        {
+        }
+
+        [SetUp]
+        public void Setup()
         {
             var services = new ServiceCollection()
                 .AddDbContext<ToDoEntities>(options =>
@@ -21,11 +27,15 @@ namespace ToDoApp.Tests
                 .BuildServiceProvider();
 
             _listRepo = services.GetRequiredService<IToDoListRepository>();
+            _db = services.GetRequiredService<ToDoEntities>();
+            
         }
 
-        [SetUp]
-        public void Setup()
+        [TearDown]
+        public void Teardown() 
         {
+            _db.Database.EnsureDeleted();
+            _db.Dispose();
         }
 
         [Test]
@@ -64,5 +74,6 @@ namespace ToDoApp.Tests
             var lists = await _listRepo.All();
             Assert.Zero(lists.Count);
         }
+
     }
 }
