@@ -1,0 +1,19 @@
+<div class="container">
+  <h2>To-Do Lists</h2>
+  <ul>
+    <li *ngFor="let list of todoLists">
+      {{ list.name }}
+      <button (click)="deleteTodoList(list.id)" class="delete-button">Delete</button>
+      <ul>
+        <li *ngFor="let item of list.items" class="todo-item">
+          {{ item.title }}
+          <button (click)="deleteTodoItem(list.id, item.id)" class="delete-button">Delete</button>
+        </li>
+      </ul>
+      <input [(ngModel)]="title" placeholder="New item" />
+      <button (click)="addTodoItem(list.id, '', 0)" class="add-button">Add Item</button>
+    </li>
+  </ul>
+  <input [(ngModel)]="newListName" placeholder="New list name" />
+  <button (click)="addTodoList()" class="add-button">Add List</button>
+</div>
