@@ -101,3 +101,7 @@ input[type="text"] {
   text-decoration: none;
   margin-top: 10px;
 }
+
+.add-button, .delete-button{
+    max-width: 250px;
+}

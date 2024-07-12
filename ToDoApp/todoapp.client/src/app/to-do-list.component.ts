@@ -6,7 +6,7 @@ import { TodoItem } from './models/to-do-list-item.model';
 @Component({
   selector: 'app-todo-list',
   templateUrl: './to-do-list.component.html',
-  styleUrls: ['./todo-list.component.css']
+  styleUrls: ['./app.component.css']
 })
 export class TodoListComponent implements OnInit {
   todoLists: TodoList[] = [];
@@ -48,6 +48,7 @@ export class TodoListComponent implements OnInit {
         const list = this.todoLists.find(list => list.id === listId);
         list?.items?.push(item);
         this.title = '';
+        this.loadTodoLists();
       });
     }
   }
